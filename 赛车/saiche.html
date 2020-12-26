@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京赛车</title>
+</head>
+<style>
+    #head{
+        width: 100%;
+        height: 110px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 110px;
+        background-color:#000;
+        color: #fff;
+    }
+    #road1,#road2,#road3,#road4{
+        width: 100%;
+        height: 100px;
+        position: relative;
+        background-color:#b0312c;
+        transition: all .05s;
+        margin-top: 20px;
+    }
+    #car1,#car2,#car3,#car4{
+        position: absolute;
+        top:12px;
+        left: 0%;
+		transition:all 0.05s;
+    }
+    #car1 img,#car2 img,#car3 img,#car4 img{
+        width: 40%;
+    }
+    #contral{
+        width: 100%;
+        height: 250px;
+    }
+    #con_in{
+        width: 1850px;
+        height: 100%;
+        margin: 0 auto;
+        background-color: bisque;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #con_in div{
+        width: 580px;
+        height: 230px;
+        background-color: #000;
+    }
+    #con_r{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #con_r div{
+        width: 300px;
+        height:50px ;
+        background-color: #fff;
+        text-align: center;
+        font-size: 35px;
+        line-height: 50px;
+    }
+    #con_l{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #chose_car{
+        width: 140px !important;
+        height: 140px !important;
+        background-color: #000 !important;
+    }
+    #chose_car img{
+        width: 140px;
+    }
+    #start{
+        display: block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #fff;
+        font-size: 30px;
+        line-height: 80px;
+        margin: 30px auto;
+        transition: all 1s;
+    }
+    #start:hover{
+        background-color: #f00;
+    }
+    #time_re{
+        position: absolute;
+        top:50%;
+        left:50%;
+    }
+    #re_start{
+        display: block;
+        width: 180px;
+        height: 60px;
+        margin: 0 auto;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div id="head">
+        <h1>欢乐竞技场-赛车</h1>
+    </div>
+    <div id="road1">
+        <div id="car1">
+            <img src="汽车1.png" alt="">
+        </div>
+    </div>
+    <div id="road2">
+        <div id="car2">
+            <img src="汽车2.png" alt="">
+        </div>
+    </div>
+    <div id="road3">
+        <div id="car3">
+            <img src="汽车3.png" alt="">
+        </div>
+    </div>
+    <div id="road4">
+        <div id="car4">
+            <img src="汽车4.png" alt="">
+        </div>
+    </div>
+    <div id="contral">
+        <div id="con_in">
+            <div id="con_l">
+                <button id="last">上一辆</button>
+                <div id="chose_car">
+                    <img id="pict" src="汽车1.png" alt="">
+                </div>
+                <button id="next">下一辆</button>
+            </div>
+            <div id="con_m">
+                <button id="start">开始</button>
+                <audio id="car_start" src="car_start.mp3" autoplay=""></audio>
+                <!-- <button id="re_start">我不服，重开</button> -->
+            </div>
+            <div id="con_r">
+                <div id="num1"></div>
+                <div id="num2"></div>
+                <div id="num3"></div>
+                <div id="num4"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var dis1 = 0,time1 = 0;
+        var dis2 = 0,time2 = 0;
+        var dis3 = 0,time3 = 0;
+        var dis4 = 0,time4 = 0;
+        var btn = document.getElementById("start");
+        var re_start = document.getElementById("re_start");
+        btn.onclick = function(){
+            var car_start = document.getElementById("car_start");
+            car_start.play();
+                
+            var car1 = setInterval(
+                function(){
+                    time1 += 1;
+                    dis1 += Math.ceil(Math.random()*10);
+                    if(dis1 >= 1000){
+                        dis1 = 1000;
+                      clearInterval(car1);
+                    };
+                    var c1p = document.getElementById("car1");
+                    var time_numb1 = document.getElementById("num1");
+                    c1p.style.left = `${dis1/12}%`;
+                    time_numb1.innerHTML = `1号车用时${time1}秒`;
+                    // console.log(dis1);
+                },50);
+                // console.log(`第一辆车用时${time1}秒跑完了全程`);
+                var car2 = setInterval(
+                function(){
+                    time2 += 1;
+                    dis2 += Math.ceil(Math.random()*10);
+                    if(dis2 >= 1000){
+                        dis2 = 1000;
+                      clearInterval(car2);
+                    };
+                    var c2p = document.getElementById("car2");
+                    var time_numb2 = document.getElementById("num2");
+                    c2p.style.left = `${dis2/12}%`;
+                    time_numb2.innerHTML = `2号车用时${time2}秒`;
+                    // console.log(dis1);
+                },50);
+                var car3 = setInterval(
+                function(){
+                    time3 += 1;
+                    dis3 += Math.ceil(Math.random()*10);
+                    if(dis3 >= 1000){
+                        dis3 = 1000;
+                      clearInterval(car3);
+                    };
+                    var c3p = document.getElementById("car3");
+                    var time_numb3 = document.getElementById("num3");
+                    c3p.style.left = `${dis3/12}%`;
+                    time_numb3.innerHTML = `3号车用时${time3}秒`;
+                    // console.log(dis1);
+                },50);
+                var car4 = setInterval(
+                function(){
+                    time4 += 1;
+                    dis4 += Math.ceil(Math.random()*10);
+                    if(dis4 >= 1000){
+                        dis4 = 1000;
+                      clearInterval(car4);
+                    };
+                    var c4p = document.getElementById("car4");
+                    var time_numb4 = document.getElementById("num4");
+                    c4p.style.left = `${dis4/12}%`;
+                    time_numb4.innerHTML = `4号车用时${time4}秒`;
+                    // console.log(dis1);
+                },50);
+        }
+        var next = document.getElementById("next");
+        var picn = 1;
+        next.onclick = function(){
+            var pict = document.getElementById("pict");
+            picn += 1;
+            pict.src = `汽车${picn}.png`;
+            if(picn==5){
+                picn = 1;
+            }
+        };
+        var last = document.getElementById("last");
+        last.onclick = function(){
+            var pict = document.getElementById("pict");
+            picn -= 1;
+            pict.src = `汽车${picn}.png`;
+            if(picn==0){
+                picn = 4;
+            }
+        }
+        window.onload = function(){
+            alert(`    ===游戏规则===    
+                  玩家可提前通过"+"或者"-"选
+                  择自己看好的赛车，点击开始后
+                  赛车就会以随机的速度前进。`)
+        }
+    </script>
+</body>
+</html>

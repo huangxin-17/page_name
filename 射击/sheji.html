@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反恐精英</title>
+</head>
+<style>
+    /* div{
+        border:5px solid #fff;
+    } */
+    body{
+        background: url(bgimg.jpg);
+    }
+    #head{
+        width: 100%;
+        height: 150px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        font-size: 80px;
+        line-height: 150px;
+    }
+    #tools{
+        width: 1880px;
+        height: 800px;
+        margin:0 auto;
+        position: relative;
+        /* background-color: #000; */
+        overflow: hidden;
+    }
+    #gun,#bullet,#target,#flower{
+        position: absolute;
+    }
+    #gun{
+        top:50%;
+        margin-top: -100px;
+        transform: rotate(45deg);
+        z-index: 10;
+    }
+    #gun img{
+        width: 200px;
+    }
+    #flower{
+        top:291.5px;
+        /* left:191px; */
+        left: 96px;
+        padding-bottom:192px;
+        transform: rotate(90deg);
+        transform-origin: center center;
+        display: none;
+    }
+    #flower img{
+        width:25px;
+    }
+    #bullet{
+        position: absolute;
+        top:388.5px;
+        left:80px;
+        transform-origin: center center;
+        /* display: none; */
+        /* transform: rotate(45deg); */
+        /* transition: all 1s; */
+        /* z-index: 100; */
+    }
+    #bullet img{
+        display: block;
+        width:25px;
+        float: right;
+        transform: rotate(45deg);
+    }
+    #target{
+        right: 0px;
+        top:0px;
+        transition: all .5s;
+    }
+</style>
+<body>
+    <div id="head">全民枪战</div>
+    <div id="tools">
+        <div id="gun">
+            <img src="枪械-ak.png" alt="">
+            <audio id="voice" src="11833.mp3"></audio>
+        </div>
+        <div id="flower">
+            <img src="火.png" alt="">
+        </div>
+        <div id="bullet">
+            <img src="子弹2.png" alt="">
+        </div>
+        <div id="target">
+            <img src="靶子.png" alt="">
+        </div>
+    </div>
+    <div id="controls">
+        <button id="fire">发射</button>
+    </div>
+    <script>
+        var gun = document.querySelector("#gun");
+        var fire = document.getElementById("fire");
+        var flower = document.getElementById("flower");
+        var bullet = document.getElementById("bullet");
+        var bullet1 = document.querySelector("#bullet>img");
+        var deg = 45;
+        var gun_turn_d = function(){
+            deg += 1;
+            gun.style.transform = `rotate(${deg}deg)`;
+            bullet.style.transform = `rotate(${deg-45}deg)`;
+            flower.style.transform = `rotate(${45+deg}deg)`;
+            // bullet1.style.transform = `rotate(${deg}deg)`;
+        }
+
+        var gun_turn_u = function(){
+            deg -= 1;
+            gun.style.transform = `rotate(${deg}deg)`;
+            bullet.style.transform = `rotate(${deg-45}deg)`;
+            flower.style.transform = `rotate(${45+deg}deg)`;
+            // bullet1.style.transform = `rotate(${deg}deg)`;
+        }
+
+        document.onkeydown = function(evt){
+            var evt = window.event?window.event:evt;
+            if(evt.keyCode == 87){
+                gun_turn_d();        
+            }else if(evt.keyCode == 83){
+                gun_turn_u();
+            }else if(evt.keyCode == 13){
+                fire.onclick();        
+            }
+        }
+
+        fire.onclick = function(){
+            var open = function(){
+            var bullet = document.querySelector("#bullet");
+            var flower = document.querySelector("#flower");
+            // bullet.style.left = `2000px`;
+            bullet.style.width = "2000px";
+            bullet.style.transition = `all .5s`;
+            flower.style.display = "block";
+        };
+        open();
+        voice.play();
+        var back = setTimeout(
+            function(){
+                var bullet = document.querySelector("#bullet");
+                var flower = document.querySelector("#flower");
+                // bullet.style.left = `172px`;
+                bullet.style.width = "0px";
+                bullet.style.transition = `0s`;
+                flower.style.display = "none";
+                // bullet.style.display = "none";
+        },500);
+        // back();
+        }
+        // (function(){
+        //     var target = document.querySelector("#target");
+        //     target.style.top = `${Math.random()*85}%`
+        // }());
+        var target_p = setInterval(() => {
+            var target = document.querySelector("#target");
+            target.style.top = `${Math.random()*80}%`
+        }, 500);
+        var target = document.querySelector("#target");
+        window.onload = function(){
+            alert(`    ===游戏规则===    
+                  玩家可提前通过"w"或者"s"键选
+                  调整枪口角度"enter"键射击`)
+        }
+    </script>
+</body>
+</html>

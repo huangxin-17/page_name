@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捕鱼达人</title>
+</head>
+<style>
+    #head{
+        width: 100%;
+        height: 100px;
+        font-size: 60px;
+        font-weight: bolder;
+        color: aliceblue;
+        text-align: center;
+        line-height: 100px;
+        background-color: #146cb4;
+        margin-bottom: 5px;
+    }
+    #head img{
+        display: block;
+        float: left;
+        width: 100px;
+    }
+    #pool{
+        margin: 0 auto;
+        width: 1900px;
+        height: 810px;
+        background-color: #096c99;
+        position: relative;
+        background: url("bg1.jpg");
+        background-size: cover;
+        background-position-y: -310px;
+        overflow: hidden;
+    }
+    #contrals{
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+        background-color:#5a2d18;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #contrals>div{
+        width:580px ;
+        height: 100%;
+        border-radius: 10px;
+        background-color: darkgray;
+    }
+    #bullets,#number{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #bullets>img{
+        width: 110px;
+    }
+    #bullets>button{
+        display: block;
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+        font-weight: bolder;
+        border-radius: 50%;
+    }
+    #number>div:first-child{
+        font-size: 40px;
+    }
+    #gun{
+        width: 150px;
+        height: 250px;
+        position: absolute;
+        /* background-color: #fff; */
+        bottom: 0px;
+        left: 50%;
+        margin-left: -75px;
+        z-index: 10;
+        transform: rotate(0deg);
+        transform-origin:50% 70% ;
+    }
+    #gun_d{
+        position: absolute;
+        bottom: 0;
+        width: 150px;
+        height: 150px;
+        background-color: olive;
+        border-radius: 50%;
+        z-index: 11;
+    }
+    #gun_u{
+        position: absolute;
+        top: 60px;
+        left: 50px;
+        width: 50px;
+        height: 100px;
+        background-color:darkolivegreen;
+        border-radius: 5px;
+        z-index: 11;
+    }
+    #bul_road{
+        width:40px;
+        height:40px;
+        /* border: 5px solid #f0f; */
+        position: absolute;
+        margin-left: -20px;
+        left: 50%;
+        bottom: 75px;
+        transform: rotate(0deg);
+        transform-origin:50% bottom ;
+        transition: all .5s;
+        z-index: 9;
+    }
+    #bul_r_i{
+        display: block;
+        width: 40px;
+        height: 40px;
+        top:0;
+        z-index: 9;
+    }
+    #f1,#f2,#f3,#f4,#f5{
+        position: absolute;
+        transition: all 5s;
+    }
+    #f1 img,#f2 img{
+        width: 280px;
+    }
+    #f3 img{
+        width: 200px;
+    }
+    #f4 img{
+        width:340px;
+    }
+    #f5 img{
+        width:170px;
+    }
+</style>
+<body>
+    <div id="head">
+        <img src="千炮捕鱼.png" alt="">
+        全民捕鱼-街机版
+    </div>
+    <div id="pool">
+        <div id="f1">
+            <img src="鱼.png" alt="">
+        </div>
+        <div id="f2">
+            <img src="鱼2.png" alt="">
+        </div>
+        <div id="f3">
+            <img src="鱼3.png" alt="">
+        </div>
+        <div id="f4">
+            <img src="鱼4.png" alt="">
+        </div>
+        <div id="f5">
+            <img src="乌龟.png" alt="">
+        </div>
+        <div id="bul_road">
+            <img id="bul_r_i" src="火箭4.png" alt=""></img>
+        </div>
+        <!-- <img src="火箭4.png" alt=""> -->
+        <div id="gun">
+            <div id="gun_d">
+                <div id="bullet">
+                </div>
+            </div>
+            <div id="gun_u"></div>
+        </div>
+        <div id="contrals">
+            <div id="bullets">
+                <button>-</button>
+                <audio id="bgm" src="bgm.mp3"></audio>
+                <audio id="turn" src="turn.mp3"></audio>
+                <audio id="change_bul" src="change_bul.mp3"></audio>
+                <audio id="fire1" src="fire.mp3"></audio>
+                <img id="bullet_t" src="火箭4.png" alt="">
+                <button>+</button>
+            </div>
+            <div id="gun1"></div>
+            <div id="number">
+                <div>剩余炮弹:100发</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var bul_type = document.querySelector("#bullet_t");
+
+        var bullets = document.querySelectorAll("button");
+        var i = 4;
+        var bul_d = bullets[0].onclick = ()=>{
+            i--;
+            var bulltet = document.getElementById("bullet_t");
+            var bulltet1 = document.getElementById("bul_r_i");
+            if(i>=1){
+                bulltet.src = `火箭${i}.png`;
+                bulltet1.src = `火箭${i}.png`;
+            }
+            return i;
+        };
+        var bul_u = bullets[1].onclick = ()=>{
+            i++;
+            var bulltet = document.getElementById("bullet_t");
+            var bulltet1 = document.getElementById("bul_r_i");
+            if(i<=4){
+                bulltet.src = `火箭${i}.png`;
+                bulltet1.src = `火箭${i}.png`;
+            }
+        }
+        var deg = 0;
+        var gun_turn_l = ()=>{
+            deg--;
+            var gun = document.querySelector("#gun");
+            var bul_road =document.querySelector("#bul_road");
+            gun.style.transform = `rotate(${deg}deg)`;
+            bul_road.style.transform = `rotate(${deg}deg)`;
+        };
+        var gun_turn_r = ()=>{
+            deg++;
+            var gun = document.querySelector("#gun");
+            var bul_road =document.querySelector("#bul_road");
+            gun.style.transform = `rotate(${deg}deg)`;
+            bul_road.style.transform = `rotate(${deg}deg)`;
+        };
+        var counts = 100;
+        var bul_n = ()=>{
+            counts --;
+            var bul_number = document.querySelector("#number>div");
+            bul_number.innerHTML = `剩余炮弹:${counts}发`;
+        };
+        var fire = ()=>{
+            var bul_road = document.querySelector("#bul_road");
+            bul_road.style.height = `1200px`;
+            bul_road.style.display = `block`;
+            bul_n();  
+            setTimeout(() => {
+                var bul_road = document.querySelector("#bul_road");
+                bul_road.style.height = `40px`;
+                // bul_road.style.display = `none`;
+            }, 500);
+        };
+        document.onkeydown = function(evt){
+            var evt = window.event?window.event:evt;
+            if(evt.keyCode == 87){
+                turn.play();
+                bgm.play();
+                gun_turn_l();        
+            }else if(evt.keyCode == 83){
+                turn.play();
+                bgm.play();
+                gun_turn_r();
+            }else if(evt.keyCode == 189){
+                bul_d();
+                change_bul.play();
+            }else if(evt.keyCode == 187){
+                bul_u();
+                change_bul.play();
+            }else if(evt.keyCode == 13){
+                fire1.play();
+                fire();
+            }
+        }
+        var fish_p = ()=>{
+            var f1 = document.getElementById("f1");
+            var f2 = document.getElementById("f2");
+            var f3 = document.getElementById("f3");
+            var f4 = document.getElementById("f4");
+            var f5 = document.getElementById("f5");
+            f1.style.left = `${Math.random()*100}%`;
+            f1.style.top = `${Math.random()*100}%`;
+
+            f2.style.left = `${Math.random()*100}%`;
+            f2.style.top = `${Math.random()*100}%`;
+            f3.style.left = `${Math.random()*100}%`;
+            f3.style.top = `${Math.random()*100}%`;
+            f4.style.left = `${Math.random()*100}%`;
+            f4.style.top = `${Math.random()*100}%`;
+            f5.style.left = `${Math.random()*100}%`;
+            f5.style.top = `${Math.random()*100}%`;
+        }
+        fish_p();
+        setInterval(() => {
+            fish_p();
+        }, 5000);
+        // window.onload = ()=>{
+        //     bgm.play();
+        // }
+        window.onload = function(){
+            alert(`    ===游戏规则===    
+                  玩家可通过"+"或者"-"切
+                  换炮弹，"w"和"s"旋转炮台
+                  "enter"开火
+                  `)
+        }
+    </script>
+</body>
+</html>

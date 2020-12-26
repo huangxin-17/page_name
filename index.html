@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game center</title>
+</head>
+<style>
+h1{text-align: center;}
+#d1{
+    width:1200px;
+    height: 600px;
+    border-radius: 10px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items:center;
+    margin: 0 auto;
+    background-color: black;
+}
+#d1>a{
+    width: 230px;
+    height: 340px;
+    border: 3px solid #000;
+    display: block;
+    transition: all .7s;
+}
+#d1>a:hover{
+    border: 3px solid #fff;
+}
+#d1>a:first-child{
+    background-image: url("./publice/car.jpg");
+    background-position-x: -85px;
+}
+#d1>a:nth-child(2){
+    background-image: url("./publice/cs.jpg");
+    background-position-x: -357px;
+}
+#d1>a:nth-child(3){
+    background-image: url("./publice/bydr1.jpg");
+    background-position-x: -251px;
+}
+#d1 h2{
+    color: #fff;
+    text-align: center;
+    margin-top: 346px;
+}
+#d1 a{
+    color: #fff;
+    text-decoration: none;
+}
+</style>
+<body>
+    <h1>腾讯游戏大厅</h1>
+    <table></table>
+    <div id="d1">
+        <a href="./赛车/saiche.html">
+            <h2>北京赛车</h2>
+        </a>
+        <a href="./射击/sheji.html">
+            <h2>反恐精英</h2>
+        </a>
+        <a href="./捕鱼/fish.html">
+            <h2>海底捕鱼</h2>
+        </a>
+        <a href="#">
+            <h1>更多精彩内容请期待……</h1>
+        </a>
+    </a>
+    <audio id="bgm" src="./publice/bgm.mp3"></audio>
+    <script>
+        window.onload = function(){
+            var music_play = function(){
+                bgm.play();
+                console.log("play")
+            }
+            music_play();
+        }
+    </script>
+</body>
+</html>
